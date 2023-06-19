@@ -1,0 +1,71 @@
+{% extends 'main.html' %} {% block title %}
+create your blog
+{% endblock title %}
+
+{% block body %}
+<div class="container" style="margin-top: 100px">
+    <h2 style="text-align: center;" class="my-3">Blog Editor</h2>
+    <form method="post" action="/create-blog">
+        {% csrf_token %}
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-2 col-form-label" autocomplete="off" >Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" id="title" placeholder="Enter Value" required>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="metaTitle" class="col-sm-2 col-form-label" autocomplete="off" >Meta Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="metaTitle" id="metaTitle" placeholder="Enter Value">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="metaDescription" class="col-sm-2 col-form-label">Meta Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="metaDescription" autocomplete="off" id="metaDescription" placeholder="Enter Value">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="slug" class="col-sm-2 col-form-label"  >Slug (This slug doesn't matter when updating)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="slug" autocomplete="off" id="slug" placeholder="Enter Value">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="blogBody" class="form-label">Blog Body</label>
+            {% comment %} <textarea class="form-control" id="blogBody" name="blogBody" rows="2" placeholder="Enter Value"></textarea> {% endcomment %}
+            <textarea class="form-control" name="blogBody" rows="2" placeholder="Enter Value" id="mytextarea">Hello, World!</textarea>
+          </div>
+        <style>
+        #mytextarea{
+            height: 40vh;
+        }
+    </style>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: '#mytextarea',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+    </script>
+
+        <div class="mb-3 row">
+            <label for="imageLink" class="col-sm-2 col-form-label">Share Image Link</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="imageLink" autocomplete="off" id="imageLink" placeholder="Enter Value">
+            </div>
+        </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    {% comment %} <button type="submit" class="btn btn-primary">Add New Blog</button> {% endcomment %}
+  </form>
+</div>
+{% endblock body %}
